@@ -1,0 +1,59 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" >
+    <div class="container-fluid bg-light card shadow" style="background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+    <h2> Radiology Results</h2>
+    <br>
+        <form class="d-flex" method="GET" action="/Hospital/patientbreasts/">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search by IC or Passport number" aria-label="Search" name="r">
+      <button class="btn btn-outline-success " type="submit">Search</button>
+    </form>
+    <br>
+    {% if patientbreast_list %}
+    <table class="table">
+        <tr class="table-dark">
+            <th scope="col">ID</th>
+            <th scope="col">Patient Name</th>
+            <th scope="col">ViewType</th>
+            <th scope="col">Density</th>
+            <th scope="col">DateTaken</th>
+            <th scope="col">BreastSide</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        {% for breast in patientbreast_list %}
+        <tr>
+            <td>
+                {{ breast.id}}
+            </td>
+            <td>
+                <a href="{{breast.Patient.get_absolute_url}}">{{breast.Patient.first_name}} {{breast.Patient.last_name}} </a>
+            </td>
+            <td>{{breast.ViewType}}</td>
+            <td>{{breast.Density}}</td>
+            <td>{{breast.DateTaken}}</td>
+            <td>{{breast.BreastSide}}</td>
+            <td>
+                <a class='btn btn-success' href="{{ breast.get_absolute_url }}">View </a>
+            </td>
+            <td>
+                <a class='btn btn-primary' href="{% url 'patientbreast-change' breast.id%}">Edit</a>
+            </td>
+            <td>
+                <a class='btn btn-danger' href="{% url 'patientbreast-delete' breast.id%}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+</div>
+
+{% else %}
+<div>
+    <p>No breast information available in the system</p>
+</div>
+{% endif %}
+{% endblock %}

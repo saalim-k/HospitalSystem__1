@@ -1,0 +1,81 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+  <div class="container-fluid bg-light card shadow"style="background-color: #d9e4f5;
+background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+    <h1 class="margin-right-5">Patients</h1>
+  <hr>
+    <form class="d-flex" method="GET" action="/Hospital/patients/">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search by IC or Passport Number" aria-label="Search" name="q">
+      <button class="btn btn-outline-success " type="submit">Search</button>
+    </form>
+    <hr>
+  {% if patient_list %}
+    <table class="table">
+    <tr class="table-dark">
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">IC/Passport</th>
+      <th scope="col">Date of birth</th>
+      <th scope="col">Email Address</th>
+      <th scope="col">Phone No.</th>
+      <th scope="col">Ethnicity</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+      {% for patient in patient_list %}
+    <tr>
+      <td>
+        {{ patient.first_name }}
+      </td>
+      <td>
+        {{patient.last_name}}
+      </td>
+      <td>
+        {{patient.ic_pp}}
+      </td>
+      <td>
+        {{patient.date_of_birth}}
+      </td>
+      <td>
+        {{patient.email_address}}
+      </td>
+      <td>
+        {{patient.phone_number}}
+      </td>
+      <td>
+        {{patient.ethnicity}}
+      </td>
+      <td>
+        <a class='btn btn-success' href="{{ patient.get_absolute_url }}">View</a>
+      </td>
+      <td>
+        <a class='btn btn-primary'href="{% url 'patient-update' patient.id%}">Edit</a>
+      </td>
+      <td>
+        <a class='btn btn-danger' href="{% url 'patient-delete' patient.id%}">Delete</a>
+      </td>
+      <td>
+        {%for mammogram in patient.get_mammogram%}
+          {% if mammogram %}
+            {{mammogram.id}}
+        {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+      {% endfor %}
+  </table>
+    {% else %}
+    <p>There are no patients in the System.</p>
+  {% endif %}
+  {% if user.has_perms %}
+      <p>Hello there Doctor. Nice to meet you</p>
+      {% endif %}
+    {% if user.has_perms %}
+      <p>Hello there Nurse. Nice to meet you</p>
+      {% endif %}
+    </div>
+{% endblock %}
+  </div>

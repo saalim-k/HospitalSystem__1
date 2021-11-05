@@ -1,0 +1,50 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row" style="background-color: #d9e4f5;
+background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+      <h3>Mammogram Details </h3>
+      <div class="col-sm">
+      <div class="card shadow">
+      <div class="card-body">
+        <p><strong>Name:</strong>{{ patientbreast.Patient.first_name }} {{ patientbreast.Patient.last_name }} ||
+          <strong> Ic/Passport:</strong> {{patientbreast.Patient.ic_pp}}</p>
+        <p><strong>Mammogram:</strong></p>
+        <img src={{patientbreast.Breast_Img.url}} style="height:256px;width:256px;"/>
+        <p><strong>Breast Side:</strong> {{ patientbreast.BreastSide }}</p>
+        <p><strong>View Type:</strong> {{ patientbreast.ViewType }}</p>
+        <p><strong>Breast Density</strong> {{ patientbreast.Density }}</p>
+        <p><strong>Date Taken</strong> {{ patientbreast.DateTaken }}</p>
+        <a class="btn btn-primary" href="{%url 'patientbreast-change' patientbreast.id%}">EDIT</a>
+      </div>
+    </div>
+
+    </div>
+      <div class="col-sm">
+      <div class="card shadow">
+        <div class="card-body">
+        <p><strong>Classification Results</strong>
+          {% if patientbreast.prediction != "" %}
+          {{ patientbreast.prediction }}</p>
+        {% else %}
+        [Click predict to view Classification Results]
+        </p>
+        <a class="btn btn-primary" href="{%url 'predict' patientbreast.id%}">Predict</a>
+        {% endif %}
+        <p><strong>Segmented image:</strong>
+          {%if patientbreast.predicted_img %}
+        </p><img src={{patientbreast.predicted_img.url}} style="height:256px;width:256px;"/>
+        <p><strong>Segmentation results:</strong>{{patientbreast.seg_results}}</p>
+        {% else %}
+        [Click Segment to view segmented image]
+        </p>
+        <a class="btn btn-primary" href="{%url 'segment' patientbreast.id%}">Segment</a>
+        {% endif %}
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

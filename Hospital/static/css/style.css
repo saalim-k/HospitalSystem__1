@@ -1,0 +1,26 @@
+body{
+    justify-content: center;
+    background-image: url("../images/background1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  color: black;
+  text-align: center;
+}

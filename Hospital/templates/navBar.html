@@ -1,0 +1,50 @@
+{% load static %}
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #d9e4f5;
+background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img width="100" height="100" src="{% static '/images/pink-ribbon-icon-16.jpg' %}"/></img>
+        Breast Cancer Hospital System
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+      </li>
+
+          {% if user.is_authenticated %}
+<!--          <li class="nav-item dropdown">-->
+<!--        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--          Navigation-->
+<!--        </a>-->
+<!--        <ul class="dropdown-menu">-->
+<!--          <a class="dropdown-item" href="{%url 'patients' %}">view Patients</a>-->
+<!--          <a class="dropdown-item" href="{% url 'patient-create'%}">Add Patients</a>-->
+<!--          <div class="dropdown-divider"></div>-->
+<!--          <a class="dropdown-item" href="{%url 'patientbreasts' %}">view Mammograms</a>-->
+<!--          <a class="dropdown-item" href="{%url 'patientbreast-create' %}">Add Mammograms</a>-->
+<!--        </ul>-->
+<!--      </li>-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              {{user.get_username}}
+            </a>
+            <ul class="dropdown-menu">
+<!--              <a class="dropdown-item" href="/settings">Settings</a>-->
+<!--              <a class="dropdown-item" href="/profile">Profile</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+              <a class="dropdown-item" href="{% url 'logout'%}?next=/">Log out</a>
+            </ul>
+          </li>
+        </ul>
+        {% else %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+  <div class="container bg-light card shadow"style="background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+    <h1>Patient Information</h1>
+    <p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name}}</p>
+    <p><strong>Ic/Passport No.: </strong>{{patient.ic_pp}}</p>
+    <p><strong>Date of Birth:</strong> {{ patient.date_of_birth }}</p>
+    <p><strong>Residential Address:</strong> {{ patient.residential_address }}</p>
+    <p><strong>Postal Address:</strong> {{ patient.postal_address }}</p>
+    <p><strong>Email Address:</strong> {{ patient.email_address }}</p>
+    <p><strong>Phone Number:</strong> {{ patient.phone_number }}</p>
+    <p><strong>Ethnicity:</strong> {{ patient.ethnicity }}</p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+    <a class='btn btn-primary col-lg-1' href="{% url 'patient-update' patient.id%}">Edit</a>
+    <a  class='btn btn-danger col-lg-1' href="{% url 'patient-delete' patient.id%}">Delete</a>
+  </div>
+  </div>
+
+</div>
+
+{% endblock %}

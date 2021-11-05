@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container" style="background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+  <div class="container card shadow" style="background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="table-responsive text-nowrap"style="background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+        <table class="table">
+          <th colspan="4" style="text-align: center;background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);">
+            {% if object %}
+            Edit this Mammogram Record
+            {%else%}
+            Add a new Mammogram!
+            {% endif%}
+          </th>
+        </table>
+        <table class="table table-striped">
+          {% for field in form %}
+          <tr>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}</td>
+            {% if field.help_text %}<td>{{ field.help_text|safe }}</td>{% endif %}
+            <td style="color: red">{{ field.errors }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        <table>
+          <td colspan="1">
+            <input class="btn btn-primary" type="submit" value="Submit" class="btn" >
+          </td>
+        </table>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
